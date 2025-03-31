@@ -72,7 +72,7 @@ public class Task5 : TaskBase
                 {
                     Debug.Log("Task5: 移除小卢的信，添加卢氏的信");
                     taskManager.inventoryManager.RemoveLetter("小卢的信");
-                    Sprite icon = Resources.Load<Sprite>("lushi"); // 从 Resources 加载卢氏的图标
+                    Sprite icon = Resources.Load<Sprite>("jane"); // 从 Resources 加载卢氏的图标
                     taskManager.inventoryManager.AddLetter(new Letter
                     {
                         title = "卢氏的信",

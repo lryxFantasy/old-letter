@@ -82,7 +82,7 @@ public class Task4 : TaskBase
                 {
                     visitedLuoPo = true;
                     Debug.Log("Task4: 添加罗婆的信");
-                    Sprite icon = Resources.Load<Sprite>("luopo"); // 从 Resources 加载罗婆的图标
+                    Sprite icon = Resources.Load<Sprite>("jane"); // 从 Resources 加载罗婆的图标
                     taskManager.inventoryManager.AddLetter(new Letter
                     {
                         title = "罗婆的信",
@@ -96,7 +96,7 @@ public class Task4 : TaskBase
                     letterDeliveredToXiaoLu = true;
                     Debug.Log("Task4: 移除罗婆的信，添加小卢的信");
                     taskManager.inventoryManager.RemoveLetter("罗婆的信");
-                    Sprite icon = Resources.Load<Sprite>("xiaolu"); // 从 Resources 加载小卢的图标
+                    Sprite icon = Resources.Load<Sprite>("jane"); // 从 Resources 加载小卢的图标
                     taskManager.inventoryManager.AddLetter(new Letter
                     {
                         title = "小卢的信",

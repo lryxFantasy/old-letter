@@ -86,7 +86,7 @@ public class Task1 : TaskBase
             if (taskManager != null && taskManager.inventoryManager != null)
             {
                 Debug.Log("获得新信件");
-                Sprite icon = Resources.Load<Sprite>("moshou"); // 从 Resources 加载墨守的图标
+                Sprite icon = Resources.Load<Sprite>("jane"); // 从 Resources 加载墨守的图标
                 taskManager.inventoryManager.RemoveLetter("简工给墨守的信");
                 taskManager.inventoryManager.AddLetter(new Letter
                 {

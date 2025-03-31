@@ -93,7 +93,7 @@ public class HouseTrigger : MonoBehaviour
 
         foreach (var letter in taskManager.inventoryManager.letters)
         {
-            if (letter.title == "·ÏÆú·¿ÎİµÄÔ¿³×")
+            if (letter.title == "·ÏÄ¾ÎİµÄÔ¿³×")
             {
                 return true;
             }
