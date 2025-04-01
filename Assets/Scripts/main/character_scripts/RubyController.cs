@@ -132,11 +132,11 @@ public class RubyController : MonoBehaviour
                 {
                     if (!cameraController.IsIndoors() && currentHealth > 0) // 室外每秒-4血
                     {
-                        ChangeHealth(-2);
+                        ChangeHealth(-6);
                     }
                     else if (cameraController.IsIndoors() && currentHealth < maxHealth) // 室内每秒+5血
                     {
-                        ChangeHealth(4);
+                        ChangeHealth(12);
                     }
                 }
             }

@@ -100263,7 +100263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 39.85, y: -29.63}
+  m_AnchoredPosition: {x: 39.850098, y: -29.629883}
   m_SizeDelta: {x: 130.4675, y: 55.4039}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1472061892
@@ -138713,6 +138713,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: grandma_home
       objectReference: {fileID: 0}
+    - target: {fileID: 6723406525257164925, guid: 02499ce130d08ec4b98a62df7376086b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.3780904
+      objectReference: {fileID: 0}
+    - target: {fileID: 6723406525257164925, guid: 02499ce130d08ec4b98a62df7376086b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.6466
+      objectReference: {fileID: 0}
     - target: {fileID: 6944458988463417950, guid: 02499ce130d08ec4b98a62df7376086b,
         type: 3}
       propertyPath: cameraController
@@ -139586,6 +139596,12 @@ PrefabInstance:
       objectReference: {fileID: 1303107470}
     - target: {fileID: 4211369896265750851, guid: f0d90669f79936447a5a5dee1f0d1c59,
         type: 3}
+      propertyPath: bottomSpriteImage
+      value: 
+      objectReference: {fileID: 1054749677, guid: 453ebd13a9151ca4e89214185c08d5ef,
+        type: 3}
+    - target: {fileID: 4211369896265750851, guid: f0d90669f79936447a5a5dee1f0d1c59,
+        type: 3}
       propertyPath: favorabilitySlider
       value: 
       objectReference: {fileID: 1531212186}
@@ -139647,7 +139663,7 @@ PrefabInstance:
     - target: {fileID: 7277432513303000275, guid: f0d90669f79936447a5a5dee1f0d1c59,
         type: 3}
       propertyPath: speed
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7277432513303000275, guid: f0d90669f79936447a5a5dee1f0d1c59,
         type: 3}
