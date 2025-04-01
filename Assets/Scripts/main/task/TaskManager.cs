@@ -106,8 +106,8 @@ public class TaskManager : MonoBehaviour
         if (inventoryManager != null && !(newTask is Task0) && newTask is Task1)
             inventoryManager.AddLetter(new Letter 
             { 
-                title = "简工给墨守的信", 
-                content = "吾依《考工记》齿轮之术修墨信，木制也，以村中木料拼成，或有不灵，然试之可用。欲使之于墨科村送信，疫病甚，人不可出门，染病之险大，木信使乃现唯一途。前兄言欲寄书与墨诗，若有，交之，吾令其代送。知兄不信新物，谓无用，然此物不染疫，可助一二。吾研水车提水之器，进展缓，成则送兄。有他需，书之，彼送归，勿与吾客套。——简工",
+                title = "简姝儿给墨守的信", 
+                content = "墨守兄，天象乱，彗星贯紫宫，日食蔽日，洪水滔天，田毁人困，墨科村危在旦夕。吾依《墨子》“杠杆胜重”之理，以桑木嵌滑轮、齿轮，制木童，虽简陋，行走可信。洪患阻路，驿站尽断，唯书信通智，木童代步，乃现唯一途。\r\n\r\n兄避世久矣，然《墨子》云“兼爱济世”，昔与卢平约救苍生，兄心未冷乎？吾研水车引洪之术，欲以滑轮提升效率，疏洪救田，然力不足，缺兄杠杆之妙。若兄有意，付木童一策，助吾成水闸，护农田，报朝廷，墨科村或可生还。盼兄回言，勿辞。——简姝儿\r\n",
                 icon = icon
             });
     }
@@ -124,7 +124,7 @@ public class TaskManager : MonoBehaviour
             isIndoors = cameraController?.IsIndoors() ?? false,
             currentHouseIndex = cameraController?.currentHouseIndex ?? -1,
             lastPlayerMapPosition = cameraController?.lastPlayerMapPosition ?? Vector3.zero,
-            npcFavorabilityList = playerController.GetFavorabilityData() // 获取好感度数据
+            npcFavorabilityList = playerController.GetFavorabilityData() // 获取灵犀度数据
         };
 
         File.WriteAllText(savePath, JsonUtility.ToJson(data));
@@ -170,7 +170,7 @@ public class TaskManager : MonoBehaviour
                 : new Vector3(data.playerPosition.x, data.playerPosition.y, cameraController.transform.position.z) + cameraController.offset;
         }
 
-        // 加载好感度数据
+        // 加载灵犀度数据
         playerController.LoadFavorabilityData(data.npcFavorabilityList);
 
         inventoryManager.letters = data.letters;

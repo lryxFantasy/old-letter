@@ -6,7 +6,7 @@ using System.Collections;
 [System.Serializable]
 public class Task6 : TaskBase
 {
-    private bool letterDeliveredToVictor = false;
+    private bool letterDeliveredToMoShou = false; // 是否送达卢氏给墨守的信
     private string[] currentDialogue;
     private int dialogueIndex = 0;
     private TMP_Text dialogueText;
@@ -33,18 +33,18 @@ public class Task6 : TaskBase
         StartCoroutine(ShowTaskStartPanel());
     }
 
-    public override string GetTaskName() => "硝烟中的尘埃";
+    public override string GetTaskName() => "战火余烬";
 
-    public override string GetTaskObjective() => $"送达【伊芙·伍德】给【维克托·凯恩】的信：{(letterDeliveredToVictor ? "已完成" : "未完成")}";
+    public override string GetTaskObjective() => $"送达【卢氏】给【墨守】的信：{(letterDeliveredToMoShou ? "已完成" : "未完成")}";
 
-    public override bool IsTaskComplete() => letterDeliveredToVictor;
+    public override bool IsTaskComplete() => letterDeliveredToMoShou;
 
     public override void DeliverLetter(string targetResident)
     {
         dialogueIndex = 0;
-        currentDialogue = targetResident == "维克托·凯恩" && !letterDeliveredToVictor
-            ? GetDialogueForVictor()
-            : new string[] { "【……】你还没有信" };
+        currentDialogue = targetResident == "墨守" && !letterDeliveredToMoShou
+            ? GetDialogueForMoShou()
+            : new string[] { "【……】你还没有信可送给此人。" };
 
         StartDialogue();
     }
@@ -65,18 +65,18 @@ public class Task6 : TaskBase
         else
         {
             dialoguePanel.SetActive(false);
-            if (!letterDeliveredToVictor && currentDialogue.Length > 1)
+            if (!letterDeliveredToMoShou && currentDialogue.Length > 1)
             {
-                letterDeliveredToVictor = true;
+                letterDeliveredToMoShou = true;
                 if (taskManager != null && taskManager.inventoryManager != null)
                 {
-                    Debug.Log("Task6: 移除伊芙的信，添加神秘房子的钥匙");
-                    Sprite icon = Resources.Load<Sprite>("key"); // 从 Resources 加载图标
-                    taskManager.inventoryManager.RemoveLetter("伊芙的信");
+                    Debug.Log("Task6: 移除卢氏的信，添加神秘木屋的钥匙");
+                    taskManager.inventoryManager.RemoveLetter("卢氏致墨守之信");
+                    Sprite icon = Resources.Load<Sprite>("key"); // 从 Resources 加载钥匙图标
                     taskManager.inventoryManager.AddLetter(new Letter
                     {
-                        title = "废弃房屋的钥匙",
-                        content = "老兵在家里翻出来的钥匙，似乎可以打开村子上边那座房子，如果你已经做完了所有想做的事情，和每个人都好感度大于10，也许可以看看里面有些什么。",
+                        title = "废木屋的钥匙",
+                        content = "此乃墨守家中翻出之物，似可开启村北废木屋。昔日战乱，墨守携卢氏母子归村，此屋或藏旧时之秘。若汝与村人皆亲（灵犀度大于10），可探其中究竟。",
                         icon = icon
                     });
                 }
@@ -108,29 +108,26 @@ public class Task6 : TaskBase
         }
     }
 
-    private string[] GetDialogueForVictor()
+    private string[] GetDialogueForMoShou()
     {
         return new string[]
         {
-            "【维克托·凯恩】是你啊，铁皮罐头……又跑来送信了？",
-            "【维克托·凯恩】进来吧，关于我儿子的事，还得谢谢你了……信呢？拿给我。",
+            "【墨守】又是你，小木头……又送信来了？",
+            "【墨守】进来吧，墨成的事多亏你了……信给我。",
             "【……】",
-            "【维克托·凯恩】唉，伊芙这女人……她说她不怪我。可我对不起他们一家……",
-            "【维克托·凯恩】小卢克的父亲，卢克，他死在我面前，我没保住他……",
-            "【维克托·凯恩】那天战场上很混乱，我们溃败了，敌军打到了指挥部。",
-            "【维克托·凯恩】子弹在我耳边呼啸着掠过，空气中硝烟味刺鼻到让人窒息，天红得像血……",
-            "【维克托·凯恩】我喊他趴下，可他没听见，流弹穿过他的胸口，血溅了我一身……",
-            "【维克托·凯恩】我拖着这条烂腿爬过去时，他已经只剩一口气了，他伸手握住我，另一只手里还攥着枪，",
-            "【维克托·凯恩】他想说些什么，可已经没声了，但我知道，他在乎他们娘俩。",
-            "【维克托·凯恩】我没做到……没让他活着回去见他的儿子。",
-            "【维克托·凯恩】这条腿是那时候废的，疼得我睡不着，可我活着回来了，他没回。",
-            "【维克托·凯恩】伊芙说她不怪我，可我过不了自己这关……战争结束后，我把伊芙他们接到了信火村避难。",
-            "【维克托·凯恩】每次看到小卢克那孩子，我就想起卢克，想起他每次提到儿子脸上的笑容……",
-            "【维克托·凯恩】我欠他们的，太多了。",
-            "【维克托·凯恩】也许是时候释怀了，我会给他们回信的，我想把记忆里的卢克写下来，可能……可能需要点时间吧……",
-            "【维克托·凯恩】告诉伊芙我会回信的。替我跟她说……让她别太累，小卢克还得靠她。",
-            "【维克托·凯恩】哦对了，这是我在家里翻出来的钥匙，似乎可以打开村子上边那座房子，听说是战时留下的。",
-            "【维克托·凯恩】我是没机会出门了，也许你可以看看里面有些什么。"
+            "【墨守】卢氏这信……她不怨我，可我欠她一家太多。",
+            "【墨守】卢平是我的忘年交，我们一同赶考赶赴朝廷……",
+            "【墨守】可吾辈空怀一腔抱负，却受尽了朝廷野党小人记恨。",
+            "【墨守】他一心想做出实绩，却被小人诬陷，后被贬，此后一病不起……",
+            "【墨守】去世前，我去了他的府邸。",
+            "【墨守】他抓着我，喘着说不出话，我知道他惦记卢氏母子。",
+            "【墨守】想当初，他和我一腔热血，妄想用墨家千年兼爱非攻思想兴修水利，改革朝政。",
+            "【墨守】可他死后，我也心灰意冷，回此山村隐居。",
+            "【墨守】我带卢氏母子回了墨家村，每见小卢，我都想起卢平，想他笑的样子……",
+            "【墨守】她让我出山，可我这身体，这心，早没用了。",
+            "【墨守】不过她说得对，《墨子》‘兼爱济世’，我跟卢平的约还没完……我得想想。",
+            "【墨守】告诉卢氏，我会回信，慢慢写。让她别太累，小卢靠她。",
+            "【墨守】对了，这钥匙是我翻出来的，村北废木屋的，这里面或许能找到你要的东西，我去不了，你去瞧瞧吧。"
         };
     }
 
@@ -153,6 +150,7 @@ public class Task6 : TaskBase
                     canvasGroup = taskCompletePanel.AddComponent<CanvasGroup>();
                 }
                 canvasGroup.alpha = 0f;
+                taskCompletePanel.SetActive(false); // 确保初始隐藏
             }
         }
         else
@@ -166,7 +164,9 @@ public class Task6 : TaskBase
     {
         if (taskCompletePanel != null && taskCompleteText != null)
         {
-            taskCompleteText.text = "任务6——硝烟中的尘埃";
+            taskCompleteText.text = "任务6——苍生之约定";
+            taskCompletePanel.SetActive(true);
+
             CanvasGroup canvasGroup = taskCompletePanel.GetComponent<CanvasGroup>();
             if (canvasGroup == null)
             {

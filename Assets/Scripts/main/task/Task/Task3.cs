@@ -6,7 +6,7 @@ using System.Collections;
 [System.Serializable]
 public class Task3 : TaskBase
 {
-    private bool letterDeliveredToJianGong = false; // 是否送达墨诗给简工的信
+    private bool letterDeliveredToJianShuEr = false; // 是否送达墨成给简姝儿的信
     private string[] currentDialogue;
     private int dialogueIndex = 0;
     private TMP_Text dialogueText;
@@ -33,18 +33,18 @@ public class Task3 : TaskBase
         StartCoroutine(ShowTaskStartPanel());
     }
 
-    public override string GetTaskName() => "理性之恋歌";
+    public override string GetTaskName() => "光学与力学";
 
-    public override string GetTaskObjective() => $"送达【墨诗】给【简工】的信：{(letterDeliveredToJianGong ? "已完成" : "未完成")}";
+    public override string GetTaskObjective() => $"送达【墨成】给【简姝儿】的信：{(letterDeliveredToJianShuEr ? "已完成" : "未完成")}";
 
-    public override bool IsTaskComplete() => letterDeliveredToJianGong;
+    public override bool IsTaskComplete() => letterDeliveredToJianShuEr;
 
     public override void DeliverLetter(string targetResident)
     {
         dialogueIndex = 0;
-        currentDialogue = targetResident == "简工" && !letterDeliveredToJianGong
-            ? GetDialogueForJianGong()
-            : new string[] { "【……】你还没有信" };
+        currentDialogue = targetResident == "简姝儿" && !letterDeliveredToJianShuEr
+            ? GetDialogueForJianShuEr()
+            : new string[] { "【……】你还没有信可送给此人。" };
 
         StartDialogue();
     }
@@ -65,13 +65,13 @@ public class Task3 : TaskBase
         else
         {
             dialoguePanel.SetActive(false);
-            if (!letterDeliveredToJianGong && currentDialogue.Length > 1)
+            if (!letterDeliveredToJianShuEr && currentDialogue.Length > 1)
             {
-                letterDeliveredToJianGong = true;
+                letterDeliveredToJianShuEr = true;
                 if (taskManager != null && taskManager.inventoryManager != null)
                 {
-                    Debug.Log("Task3: 移除墨诗的信");
-                    taskManager.inventoryManager.RemoveLetter("墨诗的信");
+                    Debug.Log("Task3: 移除墨成的信");
+                    taskManager.inventoryManager.RemoveLetter("墨成致简姝儿之信");
                 }
                 else
                 {
@@ -101,24 +101,21 @@ public class Task3 : TaskBase
         }
     }
 
-    private string[] GetDialogueForJianGong()
+    private string[] GetDialogueForJianShuEr()
     {
         return new string[]
         {
-            "【简工】回来了？有给我的信？让我看看。",
+            "【简姝儿】回来了？有我的信？快拿来瞧瞧。",
             "【……】",
-            "【简工】墨诗的信？他又写这些……满篇花哨的话，我得理清楚才能看明白。",
-            "【简工】他说起我们初见时的星空，我记得那时候，但当时我只想测星光的变化，哪有心思看他。",
-            "【简工】他……写得这么直白，我真有点……不知道怎么回，心乱了。",
-            "【简工】他恋爱时就这样，热情得像火，我有点招架不住。",
-            "【简工】认识他之前，我的日子只有齿轮和滑轮，一切都能用技术解决，",
-            "【简工】可他的热情像团火，把我的心搅乱了，感情这东西，我应付不来。",
-            "【简工】我喜欢技术，喜欢能修的东西，他却老说诗，说心动，说那些抓不住的东西……",
-            "【简工】也许我能懂，可有些话我说不出口，可能……有点害羞吧。",
-            "【简工】这个傻子，让我怎么办？",
-            "【简工】如果你再去见他，替我说一句，嗯，我不擅长花哨的话，但也许，我确实挺喜欢他的。",
-            "【简工】我会给他回信。",
-            "【简工】哦，罗婆说想让你帮忙送信，她住在村东北的小屋，谢谢你。"
+            "【简姝儿】墨成的信？这家伙话还是这么多，得一句句拆开看。",
+            "【简姝儿】他提初见那晚，我记得，当时我在调水车的滑轮，试着让齿轮咬合更稳，哪有空听他瞎扯。",
+            "【简姝儿】他写了不少光学的事，小孔成像、铜镜折光，想做信号装置？这倒有点意思。",
+            "【简姝儿】我算了算，他那铜镜得用滑轮组调角度，不然光投不远。我手头有桑木和细绳，能搭个轻便支架，配上齿轮转轴，兴许能成。",
+            "【简姝儿】我造东西讲实打实，滑轮省力，齿轮传动，照《墨子》‘知行合一’的法子来，他老说献策救天下，空想多过动手。",
+            "【简姝儿】但这光学装置确实大有益处，若能研究出成果，或能加快信息传递。",
+            "【简姝儿】他那脑子转得快，我得承认，比我琢磨杠杆时多拐几个弯。",
+            "【简姝儿】你下次见他，替我说一句，他的光学设想我试试，滑轮和支架我来弄，让他把镜子摆弄准了，我会回信。",
+            "【简姝儿】我还是想说服墨守，听闻罗婆甚是了解墨家村旧事，或可问问罗婆可否有良策。"
         };
     }
 
@@ -141,6 +138,8 @@ public class Task3 : TaskBase
                     canvasGroup = taskCompletePanel.AddComponent<CanvasGroup>();
                 }
                 canvasGroup.alpha = 0f;
+                taskCompletePanel.SetActive(false);
+
             }
         }
         else
@@ -154,7 +153,9 @@ public class Task3 : TaskBase
     {
         if (taskCompletePanel != null && taskCompleteText != null)
         {
-            taskCompleteText.text = "任务3——理性之恋歌";
+            taskCompleteText.text = "任务3——水车";
+            taskCompletePanel.SetActive(true);
+
             CanvasGroup canvasGroup = taskCompletePanel.GetComponent<CanvasGroup>();
             if (canvasGroup == null)
             {

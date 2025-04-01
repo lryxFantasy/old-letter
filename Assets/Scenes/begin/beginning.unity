@@ -481,10 +481,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDisplay: {fileID: 830892087}
   backgroundImages:
+  - {fileID: 222583124}
   - {fileID: 334723653}
   - {fileID: 414721517}
   - {fileID: 828520488}
-  - {fileID: 222583124}
   - {fileID: 222583124}
   - {fileID: 222583124}
   backgroundMusic: {fileID: 1267809472}

@@ -33,18 +33,18 @@ public class Task5 : TaskBase
         StartCoroutine(ShowTaskStartPanel());
     }
 
-    public override string GetTaskName() => "画中之星";
+    public override string GetTaskName() => "画中的父亲";
 
     public override string GetTaskObjective() => $"送达【小卢】给【卢氏】的信：{(letterDeliveredToLuShi ? "已完成" : "未完成")}";
 
     public override bool IsTaskComplete() => letterDeliveredToLuShi;
 
-    public override void DeliverLetter(string targetResident) // 修正为 targetResident，去掉空格
+    public override void DeliverLetter(string targetResident)
     {
         dialogueIndex = 0;
         currentDialogue = targetResident == "卢氏" && !letterDeliveredToLuShi
             ? GetDialogueForLuShi()
-            : new string[] { "【……】你还没有信" };
+            : new string[] { "【……】你还没有信可送给此人。" };
 
         StartDialogue();
     }
@@ -71,14 +71,13 @@ public class Task5 : TaskBase
                 if (taskManager != null && taskManager.inventoryManager != null)
                 {
                     Debug.Log("Task5: 移除小卢的信，添加卢氏的信");
-                    taskManager.inventoryManager.RemoveLetter("小卢的信");
+                    taskManager.inventoryManager.RemoveLetter("小卢致卢氏之信");
                     Sprite icon = Resources.Load<Sprite>("jane"); // 从 Resources 加载卢氏的图标
                     taskManager.inventoryManager.AddLetter(new Letter
                     {
-                        title = "卢氏的信",
-                        content = "墨守先生，久未与君言，不知近况如何。简工言欲制一木架，君腿可痛否？君曾言此伤常扰，疫病天寒，君多留意，莫硬撑。墨诗提及君，言君依旧，口硬如石，然管他诗事渐少，可是父子情好些许？吾为彼喜。彼常言君不解诗，然吾见彼甚念君。\r\n" +
-                                  "近日小卢常问其父。彼渐长，好奇甚，问彼父何在，欲知其事。吾知彼殞于战，君部下也，流矢夺命，吾未尝责君，战乱无情，君生归已奇迹。多年来，君助甚多，衣物、粮草，常有君份，吾铭记此恩。墨诗言君心难安，憾未保彼，吾不欲君负此担。彼去时，吾未见最后一面，君必忆彼乎？彼笑、彼性，或彼日言何……吾欲闻，纵数语，吾好告小卢，使知父何人也。\r\n" +
-                                  "小卢欲吾画星空，吾不能，唯画彼面，愈画愈模糊。君若忆何，书归，不急，吾待。谢君，墨守，多年矣，君仍彼兄弟也。——卢氏\r\n",
+                        title = "卢氏致墨守之信",
+                        content = "墨公，久未通言，公近况可安？彗星乱天，洪水吞田，村人困守，墨科危矣。妾知公避世，心冷如冬，然《墨子》云“兼爱济世”，昔日公与卢君平立约，欲以力学救苍生，公岂忘之？妾画水车，研重心平衡，欲稳轮引水，复田灌溉，然力不足，缺杠杆之妙。公精于此道，昔在战场制投石机，一臂掷石百斤，今洪水虽猛，何不能挡？简姝儿以滑轮制木童，墨成以镜折光，皆为抗灾奔走，唯公手握墨家真传，却闭门不出。\r\n" +
+                                  "卢君平若在，必劝公出山。彼病逝田边，犹念农事，妾母子得公照拂至今，感铭于心。公若不出手，田尽毁，村何存？吾子小卢日日问水车可转，妾无言以对。公腿疾缠身，妾知其苦，然墨家传承非一人之物，乃济世之器。若公有意，付木童一策，杠杆之术与妾水车相合，或可引洪归渠，救田救人。昔约未完，今日可续，盼公莫辞。——卢氏",
                         icon = icon
                     });
                 }
@@ -114,18 +113,16 @@ public class Task5 : TaskBase
     {
         return new string[]
         {
-            "【卢氏】你又来了，小木人。咦？小卢给我的信，这孩子真会玩，住一起还让你送……",
+            "【卢氏】你又来了，小木人。咦？小卢的信，这孩子真是，住一块儿还让你送……",
             "【……】",
-            "【卢氏】唉……他说想知道爹的事，还让我画星空……这孩子，天真得让我心疼。",
-            "【卢氏】他爹死在战场上，是墨守的手下，你应该认识墨守。",
-            "【卢氏】我……没能见他最后一面，只知道流箭要了他的命。",
-            "【卢氏】小卢老问爹在哪儿，我只能说他爹在远方看着他，等他长大了回来……",
-            "【卢氏】不知道这么说对不对，我只能画画了。",
-            "【卢氏】我想画从前的东西，田野、溪流，他爹的笑脸，可每次下笔，手都抖，画出来的只有模糊的影子。",
-            "【卢氏】我想为他画一个没有战争的明天，星空很美，孩子在草地上跑，可现在画不出来，也许以后能吧……",
-            "【卢氏】这封信给墨守，麻烦你送过去。",
-            "【卢氏】墨诗说墨守常自责，说战场上没保住我丈夫……我不怪他，谢谢他这些年照顾我们。",
-            "【卢氏】谢谢你跑这一趟，小木人，你是村里最忙的。"
+            "【卢氏】唉……他想知道爹的事，还让我画没水的田……这孩子，天真得让我心酸。",
+            "【卢氏】卢平三年前病死了，跟墨守是兄弟，约好用《墨子》‘兼爱济世’救人，我没见他最后一面，只知道他走前惦记着天下黎民百姓。",
+            "【卢氏】小卢老问爹在哪儿，我只能说他爹在天上看着，等他长大回来……不知道这么说对不对，我只能画。",
+            "【卢氏】墨守受尽了朝廷打压，之后心灰意冷回到村子避世。",
+            "【卢氏】简姝儿和墨成说想济世，需要他的技术是吗。",
+            "【卢氏】或许我能劝得动他。",
+            "【卢氏】这信给墨守，麻烦你。墨成说墨守老觉得对不起卢平……我不怪他，谢他这些年帮我。",
+            "【卢氏】谢谢你跑这趟，小木人，你是村里最忙的。"
         };
     }
 
@@ -148,6 +145,7 @@ public class Task5 : TaskBase
                     canvasGroup = taskCompletePanel.AddComponent<CanvasGroup>();
                 }
                 canvasGroup.alpha = 0f;
+                taskCompletePanel.SetActive(false); // 确保初始隐藏
             }
         }
         else
@@ -161,7 +159,9 @@ public class Task5 : TaskBase
     {
         if (taskCompletePanel != null && taskCompleteText != null)
         {
-            taskCompleteText.text = "任务5——画中之星";
+            taskCompleteText.text = "任务5——画中的父亲";
+            taskCompletePanel.SetActive(true);
+
             CanvasGroup canvasGroup = taskCompletePanel.GetComponent<CanvasGroup>();
             if (canvasGroup == null)
             {

@@ -7,9 +7,9 @@ using System.Collections;
 public class Task1 : TaskBase
 {
     [SerializeField] public int visitCount = 0; // 已拜访的居民数量
-    [SerializeField] public bool letterDeliveredToMoShou = false; // 是否送达简工给墨守的信
-    [SerializeField] public bool returnedToJianGong = false; // 是否返回简工处
-    [SerializeField] public string[] residents = { "墨守", "墨诗", "简工", "罗婆", "小卢", "卢氏" }; // 墨科村居民列表
+    [SerializeField] public bool letterDeliveredToMoShou = false; // 是否送达简姝儿给墨守的信
+    [SerializeField] public bool returnedToJianShuEr = false; // 是否返回简姝儿处
+    [SerializeField] public string[] residents = { "墨守", "墨成", "简姝儿", "罗婆", "小卢", "卢氏" }; // 墨家村居民列表
     [SerializeField] public bool[] visitedResidents; // 记录居民是否被拜访
 
     private TMP_Text dialogueText;
@@ -35,19 +35,19 @@ public class Task1 : TaskBase
 
     public override string GetTaskName()
     {
-        return "墨科村第一封信";
+        return "墨家村第一封信";
     }
 
     public override string GetTaskObjective()
     {
-        return $"拜访墨科村的简工以外每一位居民（{visitCount}/5）\n\n" +
-               $"送达【简工】给【墨守】的信：{(letterDeliveredToMoShou ? "已完成" : "未完成")}\n\n" +
-               $"回去找【简工】：{(returnedToJianGong ? "已完成" : "未完成")}";
+        return $"拜访墨家村的简姝儿以外每位居民（{visitCount}/5）\n\n" +
+               $"送达【简姝儿】给【墨守】的信：{(letterDeliveredToMoShou ? "已完成" : "未完成")}\n\n" +
+               $"回去找【简姝儿】：{(returnedToJianShuEr ? "已完成" : "未完成")}";
     }
 
     public override bool IsTaskComplete()
     {
-        return visitCount >= 5 && letterDeliveredToMoShou && returnedToJianGong;
+        return visitCount >= 5 && letterDeliveredToMoShou && returnedToJianShuEr;
     }
 
     public void SetupDialogueUI(GameObject panel, TMP_Text text, Button button)
@@ -85,13 +85,14 @@ public class Task1 : TaskBase
             TaskManager taskManager = GetComponent<TaskManager>();
             if (taskManager != null && taskManager.inventoryManager != null)
             {
-                Debug.Log("获得新信件");
+                Debug.Log("获得新信件：墨守致墨成");
                 Sprite icon = Resources.Load<Sprite>("jane"); // 从 Resources 加载墨守的图标
-                taskManager.inventoryManager.RemoveLetter("简工给墨守的信");
+                taskManager.inventoryManager.RemoveLetter("简姝儿给墨守的信");
                 taskManager.inventoryManager.AddLetter(new Letter
                 {
-                    title = "墨守的信",
-                    content = "墨诗，简工制一木信使，名墨信，木身粗陋，观之不悦，吾不喜此新物，然彼言此乃唯一途。疫病困人，出不得，唯此木疙瘩可代步。彼言修此耗两日，村中木料为之，亦算彼有能……汝尚弄那诗耶？自幼汝喜纸笔，吾不解其用，汝母在时，常言汝有才，谓汝诗虽彼不解却喜之。天象异动，朝廷急，吾研杠杆之用，力臂二比一，省力甚，然《墨子》云“力与重成正比”，汝光学何进展？昔战乱，流矢伤吾腿，痛三日不眠，吾见同袍殞地，血染沙场，含小卢之父，唉……彼母子孤苦……彗星现之日，吾在军中，见天色骤变，汝母后亦不敌疫去。吾不知此生可有明日，然生当续也。\r\n汝处如何？村人言汝与简工相好，彼头脑清明，修器之术精，汝可随彼学一二。非谓汝诗无用，唯……欲知汝安否，汝乃吾子也。诗或难解天象，然吾不欲再失汝。简工言此木信使可靠，若有言，书归，勿使吾久候。无暇则罢，勿勉强。——墨守\r\n",
+                    title = "墨守致墨成之信",
+                    content = "墨成，简姝儿弄了个木童送信，桑木壳子嵌齿轮，走路咔哒作响，看着碍眼。彗星乱天，洪水毁地，朝廷急召献策，吾知汝欲入世，可《墨子》云“力不足则止”，人力怎敌天势？昔卢平与吾约救苍生，他病逝田边，吾心已灰，汝还信这世可救乎？\r\n" +
+                              "吾研杠杆，力臂可省力，昔在战场制投石机，一臂掷石百斤，然洪水滔天，何用？汝近况如何？简姝儿说汝常助她，她心思巧，滑轮引水或有成。吾非阻汝策，只是怕朝廷弃乡野声。腿疾又犯，天冷水大，吾只盼汝平安，勿令吾再失亲人。——墨守",
                     icon = icon
                 });
             }
@@ -100,12 +101,12 @@ public class Task1 : TaskBase
                 Debug.LogError("TaskManager 或 InventoryManager 未正确绑定，无法更新背包");
             }
         }
-        else if (targetResident == "简工")
+        else if (targetResident == "简姝儿")
         {
-            currentDialogue = GetDialogueForResident("简工");
-            if (visitCount >= 5 && letterDeliveredToMoShou && !returnedToJianGong)
+            currentDialogue = GetDialogueForResident("简姝儿");
+            if (visitCount >= 5 && letterDeliveredToMoShou && !returnedToJianShuEr)
             {
-                returnedToJianGong = true;
+                returnedToJianShuEr = true;
             }
         }
         else if (System.Array.IndexOf(residents, targetResident) >= 0)
@@ -115,7 +116,7 @@ public class Task1 : TaskBase
         }
         else
         {
-            currentDialogue = new string[] { "【……】你还没有信" };
+            currentDialogue = new string[] { "【……】你还没有信可送给此人。" };
         }
 
         StartDialogue();
@@ -201,7 +202,7 @@ public class Task1 : TaskBase
         }
         else
         {
-            Debug.LogError("未找到 TaskCompletePanel，请确保 Task0 已创建该面板！");
+            Debug.LogError("未找到 TaskCompletePanel，请确保场景中已创建该面板！");
         }
     }
 
@@ -209,7 +210,7 @@ public class Task1 : TaskBase
     {
         if (taskCompletePanel != null && taskCompleteText != null)
         {
-            taskCompleteText.text = "任务1——墨科村第一封信";
+            taskCompleteText.text = "任务1——墨家村第一封信";
             taskCompletePanel.SetActive(true);
 
             CanvasGroup canvasGroup = taskCompletePanel.GetComponent<CanvasGroup>();
@@ -255,86 +256,82 @@ public class Task1 : TaskBase
             case "墨守":
                 return new string[]
                 {
-                    "【墨守】这是什么东西？这木头玩意儿哪儿来的？",
-                    "【墨守】简工派你送信来的？",
-                    "【墨守】哼，这丫头总爱弄些稀奇古怪的东西……",
-                    "【墨守】信呢？快拿出来，别磨蹭！",
+                    "【墨守】这是什么怪东西？一堆木头也能跑来送信？",
+                    "【墨守】简姝儿捣鼓出来的吧？",
+                    "【墨守】哼，她还是这么不安分……信呢？快拿来，别在这儿晃悠！",
                     "【……】",
-                    "【墨守】简工想让你当墨科村的信使？",
-                    "【墨守】哼，现在的人啊，连送信都用木头做的，谁知道你会不会坏掉？",
-                    "【墨守】算了，这封信给墨诗，告诉他别再写那些没用的诗，男人就该学点实用的东西。",
-                    "【墨守】你要是敢拆信或者弄丢了，我非拆了你不可！",
-                    "【墨守】……还不走？别在这儿碍眼，看见你这木头身子就烦。"
+                    "【墨守】她让你当村里的信使？",
+                    "【墨守】洪水都淹到门口了，还弄这些花样，谁知道你能撑几天？",
+                    "【墨守】罢了，这封信给墨成，告诉他别老想着献策给朝廷，《墨子》有言‘力不足则止’，天要亡地，人何能为？",
+                    "【墨守】你要是弄丢了信，我砸了你这木壳子！",
+                    "【墨守】还不走？杵在这儿干嘛，看你这样就来气。"
                 };
-            case "墨诗":
+            case "墨成":
                 return new string[]
                 {
-                    "【墨诗】哦？你是新的信使？看你这模样，像从老树里蹦出来的。",
-                    "【墨诗】信给我看看。",
+                    "【墨成】哟，你就是那个木信使？模样怪有趣，像从桑树里钻出来的。",
+                    "【墨成】信给我瞧瞧。",
                     "【……】",
-                    "【墨诗】果然是简工修的你？她真厉害……虽然她不太懂我的诗。",
-                    "【墨诗】你见过她研究时的眼神吗？那光亮，比我诗里的景色还美。",
-                    "【墨诗】可惜疫病把我们隔开了，很难见面。",
-                    "【墨诗】告诉她我想她，想她专注的样子，哪怕她只会跟我讲齿轮和滑轮的道理……",
-                    "【墨诗】你会一直在村里送信吗？也许哪天，我给你写首诗，歌颂你这木头身子和灵魂的和谐。"
+                    "【墨成】简姝儿的手艺真不赖，木头都能跑起来……可父亲还是老样子，不肯抬头。",
+                    "【墨成】吾辈应当以天下为己任，救济苍生，可父亲依旧抱残守旧，消极避世……",
+                    "【墨成】你常在村里跑吗？以后我若有抗洪的策子，靠你送出去，咱们得救田救人！"
                 };
-            case "简工":
-                if (visitCount >= 5)
+            case "简姝儿":
+                if (visitCount >= 5 && letterDeliveredToMoShou)
                 {
-                    returnedToJianGong = true;
+                    returnedToJianShuEr = true;
                     return new string[]
                     {
-                        "【简工】回来了？比我预计的早半刻，你这木头还挺结实。",
-                        "【简工】信都送到了？很好，你干得不错。",
-                        "【简工】墨守没把你赶出去吧？他不喜欢机械，当年腿伤是战乱留下的，他妻子也在战中去世了……",
-                        "【简工】……还行，你比我想象的靠谱。",
-                        "【简工】墨守让你送信了？好，我给你更新任务刻板。",
-                        "【简工】你木匣右边可以自己看，以后自己更新。",
-                        "【简工】别指望我夸你，你就是个工具，送信是你的本职。"
+                        "【简姝儿】回来了？比我算的快半刻，你这木头挺顶用。",
+                        "【简姝儿】信都送到了？干得不错。",
+                        "【简姝儿】墨守没砸了你吧？他不喜新事物。",
+                        "【简姝儿】还成，你比我想的靠谱。",
+                        "【简姝儿】墨守有信让你送？好，我给你换任务刻板。",
+                        "【简姝儿】右边木匣自己看，以后自己管吧。",
+                        "【简姝儿】别等着我夸你，你是工具，送信是本分。"
                     };
                 }
                 else
                 {
                     return new string[]
                     {
-                        "【简工】你送完信了吗？",
-                        "【简工】快去吧，别在这儿浪费时间，村里还有其他人等着你送信呢。"
+                        "【简姝儿】你送完信了吗？",
+                        "【简姝儿】快去吧，别在这儿磨蹭，村里还有人等着呢。"
                     };
                 }
             case "罗婆":
                 return new string[]
                 {
-                    "【罗婆】哎呀，你就是那个送信的小木人？",
-                    "【罗婆】挺可爱的，虽然是木头做的，脑袋肯定硬得像石头。",
-                    "【罗婆】简工给我的信吗？辛苦你了，小木人。",
+                    "【罗婆】哎呀，你是送信的小木人？",
+                    "【罗婆】瞧着怪可爱的，木头身子硬邦邦。",
+                    "【罗婆】简姝儿给我的信？谢了，小家伙。",
                     "【……】",
-                    "【罗婆】原来是这样，简工把你修好了，她果然有本事。",
-                    "【罗婆】当年她跟我从长安逃到这村子避疫，我还担心她觉得这儿闷得慌，现在看来，她跟墨诗处得不错，呵呵……",
-                    "【罗婆】路上小心，疫病伤不了你，但村里的路不好走，别摔着了。"
+                    "【罗婆】原来是她修的你，真有能耐。",
+                    "【罗婆】洪水来的时候，我还以为村子完了，她跟墨成忙着治水，总算有点盼头……",
+                    "【罗婆】路上当心，洪水冲不倒你，可村里的泥泞路不好走，别卡住了。"
                 };
             case "小卢":
                 return new string[]
                 {
-                    "【小卢】哇！你真的是木头人？会飞吗？会说话吗？还是能变身？",
-                    "【小卢】你从哪儿来的？山里吗？娘说山里有怪东西，你是怪东西吗？",
-                    "【小卢】啊？有我的信！简姐姐的！快给我看！",
+                    "【小卢】哇！你是木头人？会搬水车吗？会堵洪水吗？还是能飞起来？",
+                    "【小卢】你从哪儿来的？水底下吗？娘说水里藏着怪东西，你是怪东西吗？",
+                    "【小卢】啊？有我的信！简姊姊的！快给我！",
                     "【……】",
-                    "【小卢】太好了！以后村里就有信使了。",
-                    "【小卢】以前一个月才有个驿卒来我们村。",
-                    "【小卢】你下次还来吗？我可以用娘的墨给你画一幅画，画个大大的你！"
+                    "【小卢】太好了！以后有你送信，我就能知道水车啥时候修好！",
+                    "【小卢】洪水来了，我老困在屋里，闷死了。",
+                    "【小卢】你下次还来吗？我拿娘的墨给你画个像，画你扛着水车，可威风了！"
                 };
             case "卢氏":
                 return new string[]
                 {
-                    "【卢氏】你是送信的？真稀奇，你从哪儿来的？",
-                    "【卢氏】简工派你来的吧？她总能修出这种东西，我只会用墨画些旧日的回忆……信给我看看。",
+                    "【卢氏】你是送信的？稀奇了，你从哪儿冒出来的？",
+                    "【卢氏】简姝儿派你来的？她能修木头，可惜我只会画图纸……信给我瞧瞧。",
                     "【……】",
-                    "【卢氏】以后村里有信使了，事情也许会好起来。",
-                    "【卢氏】希望小卢能看到这些……谢谢你跑这一趟。",
-                    "【卢氏】别在意你身上的木纹，这样挺好，像古画，带着岁月的痕迹。"
+                    "【卢氏】村里有了信使，兴许能想出治水的法子。",
+                    "【卢氏】希望小卢能看到田地干的那天……多谢你跑腿。"
                 };
             default:
-                return new string[] { "【……】你还没有信" };
+                return new string[] { "【……】你还没有信可送给此人。" };
         }
     }
 }

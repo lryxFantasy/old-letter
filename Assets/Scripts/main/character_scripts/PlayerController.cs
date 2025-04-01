@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel; // 对话面板
     [SerializeField] private Button optionButtonPrefab; // 选项按钮预制体
     [SerializeField] private Transform optionsContainer; // 选项容器
-    [SerializeField] private Slider favorabilitySlider; // 好感度进度条
-    [SerializeField] private TMP_Text favorabilityText; // 好感度数值文本
+    [SerializeField] private Slider favorabilitySlider; // 灵犀度进度条
+    [SerializeField] private TMP_Text favorabilityText; // 灵犀度数值文本
 
     [SerializeField] private CameraController cameraController; // 引用相机控制脚本
     private Transform nearestDoor;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private const string apiUrl = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"; // API地址
     private List<Message> conversationHistory = new List<Message>();
     private List<Button> optionButtons = new List<Button>();
-    private Dictionary<string, int> npcFavorability = new Dictionary<string, int>(); // NPC好感度
+    private Dictionary<string, int> npcFavorability = new Dictionary<string, int>(); // NPC灵犀度
 
     [System.Serializable] private class RequestBody { public string model = "qwen-plus"; public Message[] messages; public float temperature = 1.2f; }
     [System.Serializable] public class Message { public string role; public string content; }
@@ -70,10 +70,10 @@ public class PlayerController : MonoBehaviour
             favorabilitySlider.value = 0;
         }
 
-        // 初始化好感度文本
+        // 初始化灵犀度文本
         if (favorabilityText != null)
         {
-            favorabilityText.text = "好感度: 0";
+            favorabilityText.text = "灵犀度: 0";
         }
     }
 
@@ -256,10 +256,10 @@ public class PlayerController : MonoBehaviour
         conversationHistory.Add(new Message
         {
             role = "system",
-            content = $"游戏背景：641年3月16日，长安外天象异象（彗星日食），朝廷命研天象，墨科村人疫病隔无法出门，唯书信交流，由村中工匠简工依《墨子》力学之理（杠杆与滑轮）所制之木信使墨信为沟通桥，传《墨子》力学、《考工记》机械、《甘石星经》天文智，故事于天象异象后三月墨科村，村人命运因信交织，吾为其信使。角色简介及关系：墨守（力学研者），墨家后人，战乱伤退，沉默疑新科学，墨诗父，关系僵因子弃力学从诗，卢氏亡夫上司间接致孤儿，严肃如军令；墨诗（光学研者），年轻学者反战，墨守子，热情求科学艺合，母亡后与父不合，简工恋人感性理性激为灵感，诗意情露；简工（工匠），擅机械，冷静实用，墨诗恋人疫病限难聚，罗婆远房孙女，理性附术详微露关怀；罗婆（星象学家），研《甘石星经》，温柔睿智，简远房祖母，小卢“神秘友人”，寄亡孙情，信温润含旧时智；小卢（童子），战乱孤儿梦天文学家，天真乐观好奇，卢氏子，父死战乱，神秘友人以为父，受信启成长，信童趣跳跃好奇多问；卢氏（画家），以艺缅夫，感性执韧，卢氏母，与村人疏唯信寄情，信优美细腻色感强，小卢卢氏同居不需送信；吾，木信使墨信，不明村人关系，具情重逻辑，好奇，喜问物理研。任务：你将扮演{currentNPC.role}与我（信使墨信）对话，人物绝对绝对无法外出，回复需不超30字，符合场景，对话口语化极度贴合人设，不要提问，回复前加“【{currentNPC.role}】：”。每次回复后，生成两个选项，一定是作为我的回应，符合我的人设，选项需直接回复你的对话或询问你的过去，可加标点，格式为“选项1：xxx\n选项2：xxx”，确保选项明确为FANLU的回答。此外，每次回复在对话后标明好感度变化，格式只有：（+1）或（-1）或（+0），根据对话内容判断我的回应是否让{currentNPC.role}感到满意或不快，积极肯定增加好感，否定冷漠减少好感，格式为“【{currentNPC.role}】：对话内容（好感度变化）”。以上内容全部用中文，不许英文。"
+            content = $"贞观十五年三月十六，长安外墨家村，天象异变——彗星划空，日食蔽天，继而大雨滂沱，农田尽毁，朝廷急诏献策抗灾。水患阻隔村人，唯书信往来，女工匠简姝儿依《墨子》力学打造木偶“木童”送信，传递力学、天文、农事智慧。灾后三月，村人命运因信交织，吾乃木童，串联物理与人性。村长墨守，前朝官员，因党争被贬，精通杠杆却避世自居，认定天灾难抗，手握墨家手稿秘不示人，与子墨成僵持，信中沉重含愧；墨成，年轻学者，热血入世，欲献策救天下，书信激昂且满载力学思辨；简姝儿冷静务实，改良水车抗洪，制吾为使，与墨成合论机关，信中言简意赅；罗婆，长者通晓墨史，念亡孙寄情小卢，信温润藏旧智；小卢，十岁孤儿，卢平之子，好奇水车，随简姝儿摆弄吾身，信中童趣多问，追忆父志；卢氏，画师寡母，研水车平衡，夫亡后承志，信优美寄缅怀。墨守闭守秘密，墨成力争献策，简姝儿与卢氏机关相助又相争，罗婆维系团结，小卢懵懂承遗志，吾以送信连系众人，命运交错于物理与人心之间。任务：你将扮演{currentNPC.role}与我（木童）对话，回复需不超30字，符合场景，对话口语化极度贴合人设，不要提问，回复前加“【{currentNPC.role}】：”。每次回复后，生成两个选项，一定是作为我的回应，符合我的人设，选项需直接回复你的对话或询问你的过去，可加标点，格式为“选项1：xxx\n选项2：xxx”，确保选项明确为我的回答。此外，每次回复在对话后标明好感度变化，格式需带有括号只有：（+1）或（-1）或（+0），根据对话内容判断我的回应是否让{currentNPC.role}感到满意或不快，积极肯定增加好感，否定冷漠减少好感，格式为“【{currentNPC.role}】：对话内容（好感度变化）”。回复全部用中文。"
         });
 
-        // 更新好感度进度条和文本
+        // 更新灵犀度进度条和文本
         UpdateFavorabilitySlider();
 
         sendMessageCoroutine = StartCoroutine(SendMessageToQwen("你好"));
@@ -326,7 +326,7 @@ public class PlayerController : MonoBehaviour
             int favorChange = 0;
             string dialogue = dialogueWithFavor;
 
-            // 使用正则表达式匹配好感度变化，兼容全角/半角括号和空格
+            // 使用正则表达式匹配灵犀度变化，兼容全角/半角括号和空格
             var favorMatch = Regex.Match(dialogueWithFavor, @"[\(（]\s*[+-]\d+\s*[\)）]");
             if (favorMatch.Success)
             {
@@ -341,23 +341,23 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (favorText.Contains("+0")) // 支持 +0
                 {
-                    favorChange = 0; // 好感度不变
+                    favorChange = 0; // 灵犀度不变
                 }
-                // 移除好感度标记
+                // 移除灵犀度标记
                 dialogue = Regex.Replace(dialogueWithFavor, @"[\(（]\s*[+-]\d+\s*[\)）]", "").Trim();
             }
 
-            // 更新好感度
+            // 更新灵犀度
             if (currentNPC != null)
             {
                 string npcRole = currentNPC.role;
                 if (!npcFavorability.ContainsKey(npcRole)) npcFavorability[npcRole] = 0;
                 npcFavorability[npcRole] += favorChange;
-                npcFavorability[npcRole] = Mathf.Clamp(npcFavorability[npcRole], -50, 50); // 限制好感度范围
+                npcFavorability[npcRole] = Mathf.Clamp(npcFavorability[npcRole], -50, 50); // 限制灵犀度范围
                 currentNPC.favorability = npcFavorability[npcRole];
-                Debug.Log($"{npcRole} 好感度: {npcFavorability[npcRole]}");
+                Debug.Log($"{npcRole} 灵犀度: {npcFavorability[npcRole]}");
 
-                // 更新好感度进度条和文本
+                // 更新灵犀度进度条和文本
                 UpdateFavorabilitySlider();
             }
 
@@ -371,7 +371,7 @@ public class PlayerController : MonoBehaviour
         else dialogueText.text = "错误: " + request.error;
     }
 
-    // 更新好感度进度条和文本
+    // 更新灵犀度进度条和文本
     private void UpdateFavorabilitySlider()
     {
         if (favorabilitySlider != null && currentNPC != null)
@@ -380,10 +380,10 @@ public class PlayerController : MonoBehaviour
             int favorability = npcFavorability.ContainsKey(npcRole) ? npcFavorability[npcRole] : 0;
             favorabilitySlider.value = favorability; // 更新进度条
 
-            // 更新好感度文本
+            // 更新灵犀度文本
             if (favorabilityText != null)
             {
-                favorabilityText.text = $"好感度: {favorability}";
+                favorabilityText.text = $"灵犀度: {favorability}";
             }
 
 
@@ -395,7 +395,7 @@ public class PlayerController : MonoBehaviour
         return currentNPC != null ? currentNPC.role : null;
     }
 
-    // 提供好感度数据给 TaskManager
+    // 提供灵犀度数据给 TaskManager
     public List<SerializableFavorability> GetFavorabilityData()
     {
         List<SerializableFavorability> favorabilityList = new List<SerializableFavorability>();
@@ -410,7 +410,7 @@ public class PlayerController : MonoBehaviour
         return favorabilityList;
     }
 
-    // 加载好感度数据
+    // 加载灵犀度数据
     public void LoadFavorabilityData(List<SerializableFavorability> favorabilityList)
     {
         npcFavorability.Clear();
@@ -422,7 +422,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // 同步好感度到 NPC 实例
+        // 同步灵犀度到 NPC 实例
         foreach (GameObject npc in GameObject.FindGameObjectsWithTag("NPC"))
         {
             NPC npcComponent = npc.GetComponent<NPC>();

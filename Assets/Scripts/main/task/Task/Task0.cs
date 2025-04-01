@@ -9,30 +9,26 @@ public class Task0 : TaskBase
     private GameObject dialoguePanel;
     private Button nextButton;
 
-    private RubyController rubyController;
+    private RubyController rubyController; // 假设木童有类似控制器，可替换为其他机制
     private string[] currentDialogue;
     private int dialogueIndex = 0;
     private bool hasStarted = false;
 
-    // 替换为简工的开场对话，基于墨科村背景
-    private string[] janeDialogue = new string[]
+    // 简姝儿的开场对话，基于墨家村背景
+    private string[] jianShuErDialogue = new string[]
     {
-        "简工：你醒了？",
-        "简工：我花了两天修好你，用的是《墨子》杠杆原理，村里的木料和滑轮拼成的，可能不太灵活，但应该能用。",
-        "简工：你是墨信，知道吗？",
-        "简工：我不知道你还记不记得自己的用途，不过从现在起，你有新任务了。",
-        "简工：你木匣左边有任务刻板和信件竹筒。",
-        "简工：任务刻板能记录你当前的任务。",
-        "简工：信件竹筒里装着收到的信，别随便打开别人的信，太失礼了。",
-        "简工：这里是墨科村，村子不大，但人跟人隔得挺远。",
-        "简工：瘟疫闹得厉害，大家没法出门，只能靠书信联系。",
-        "简工：可惜送信不能让人亲自跑——染病的风险太高了。",
-        "简工：所以得靠你。",
-        "简工：去村里每个人的住处走一趟，认认路吧。之前墨守好像说想寄封信给他儿子，你可以去看看……",
-        "简工：别问我为什么不用驿站——瘟疫封了路，驿卒进不来。",
-        "简工：你是唯一的办法。",
-        "简工：这是我写的信，给墨守的，另外我给每个村民写了封简信。",
-        "简工：快去，别磨蹭，任务完了回来找我。"
+        "简姝儿：你醒了？",
+        "简姝儿：我花了两日修好你，用村里捡来的桑木和滑轮拼成，模样简陋，怕是不太稳，但走起来该没问题。",
+        "简姝儿：听着，你是木童，明白不？",
+        "简姝儿：我不知你还记不记得旧日的用处，可从今往后，你有新活计了。",
+        "简姝儿：你胸前竹筒左边，有任务刻板和信。",
+        "简姝儿：这儿是墨家村，地方不大。",
+        "简姝儿：你的装置可能还尚不稳定，若路上耐久度损耗过多，可能会倒下。",
+        "简姝儿：若损耗太大，请务必量力而行，前去村民屋中寻求帮助。",
+        "简姝儿：先去村里各家走一趟，认认路。前些日子墨守提过想给墨成送封信，你去瞧瞧吧……",
+        "简姝儿：别问我为啥没旁的法子，洪水断了驿站的路，《墨子》有言‘知行合一’，要救田，就得靠你这木头腿跑。",
+        "简姝儿：这是我写的信，给墨守的，另外我给村里人各备了封简信。",
+        "简姝儿：快去，别耽搁，干完回来找我。"
     };
 
     // 传送位置（可根据实际场景调整）
@@ -40,6 +36,7 @@ public class Task0 : TaskBase
 
     void Start()
     {
+        // 初始化时无需额外操作，留空
     }
 
     public void SetupDialogueUI(GameObject panel, TMP_Text text, Button button)
@@ -56,11 +53,15 @@ public class Task0 : TaskBase
     {
         if (!hasStarted)
         {
-            rubyController = FindObjectOfType<RubyController>(); // 获取 RubyController
-            rubyController.pauseHealthUpdate = true; // 暂停血量更新（这里假设墨信有类似机制，可改为其他状态暂停）
+            rubyController = FindObjectOfType<RubyController>(); // 获取木童控制器，可替换为其他机制
+            if (rubyController != null)
+            {
+                rubyController.pauseHealthUpdate = true; // 暂停耐久度更新（假设存在类似机制）
+            }
             hasStarted = true;
-            currentDialogue = janeDialogue;
+            currentDialogue = jianShuErDialogue;
             dialogueIndex = 0;
+
             TaskManager taskManager = GetComponent<TaskManager>();
             if (taskManager != null && taskManager.normalDialoguePanel != null)
             {
@@ -72,11 +73,9 @@ public class Task0 : TaskBase
 
     private IEnumerator StartDialogueWithFadeOut()
     {
-        // 直接显示对话面板
         dialoguePanel.SetActive(true);
         dialogueText.text = currentDialogue[dialogueIndex];
-        // 从黑屏淡出
-        yield return StartCoroutine(FadeManager.Instance.FadeOut(3f));
+        yield return StartCoroutine(FadeManager.Instance.FadeOut(3f)); // 从黑屏淡出
     }
 
     private void NextDialogue()
@@ -105,8 +104,10 @@ public class Task0 : TaskBase
     private void TeleportPlayer()
     {
         PlayerController playerController = FindObjectOfType<PlayerController>();
-        rubyController = FindObjectOfType<RubyController>(); // 获取 RubyController
-        rubyController.pauseHealthUpdate = false; // 恢复血量更新（可改为墨信的耐久或其他机制）
+        if (rubyController != null)
+        {
+            rubyController.pauseHealthUpdate = false; // 恢复耐久度更新
+        }
         if (playerController != null)
         {
             playerController.transform.position = teleportPosition;
@@ -124,7 +125,6 @@ public class Task0 : TaskBase
     private void SetupNextTask()
     {
         TaskManager taskManager = GetComponent<TaskManager>();
-
         if (taskManager != null)
         {
             Task1 newTask = gameObject.AddComponent<Task1>();
@@ -132,21 +132,25 @@ public class Task0 : TaskBase
             newTask.SetupDialogueUI(dialoguePanel, dialogueText, nextButton);
             taskManager.UpdateTaskDisplay();
         }
+        else
+        {
+            Debug.LogError("TaskManager 未找到，无法切换到 Task1！");
+        }
     }
 
     public override string GetTaskName()
     {
-        return "初次送信"; // 改为更符合墨科村背景的任务名
+        return "墨家村送信初启"; // 更贴合墨家村背景的任务名
     }
 
     public override string GetTaskObjective()
     {
-        return "与简工对话"; // 保持简洁
+        return "与简姝儿对话"; // 简洁明了的目标
     }
 
     public override bool IsTaskComplete()
     {
-        return dialogueIndex >= currentDialogue.Length;
+        return dialogueIndex >= currentDialogue.Length; // 对话结束即任务完成
     }
 
     public override void DeliverLetter(string targetResident)
@@ -155,7 +159,7 @@ public class Task0 : TaskBase
         if (dialoguePanel != null && dialogueText != null)
         {
             dialoguePanel.SetActive(true);
-            dialogueText.text = "简工：我已经给你任务了，快去送信吧。";
+            dialogueText.text = "简姝儿：我已经给你任务了，快去送信吧。";
             nextButton.onClick.RemoveAllListeners();
             nextButton.onClick.AddListener(() => dialoguePanel.SetActive(false));
         }

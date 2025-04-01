@@ -20201,6 +20201,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: soldier_home
       objectReference: {fileID: 0}
+    - target: {fileID: 3052118366254987755, guid: c599828b4f8c3f24d8e3e558540f5850,
+        type: 3}
+      propertyPath: houseIndex
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052118366254987755, guid: c599828b4f8c3f24d8e3e558540f5850,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 1394440365}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -95301,7 +95311,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u597D\u611F\u5EA6: 0"
+  m_text: "\u7075\u7280\u5EA6: 0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 29d27c93b3fa1c743adb6fd5fe1f146c, type: 2}
   m_sharedMaterial: {fileID: -3202491962267490141, guid: 29d27c93b3fa1c743adb6fd5fe1f146c,
@@ -122087,6 +122097,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: door3
       objectReference: {fileID: 0}
+    - target: {fileID: 5943125583794461871, guid: 519dc834d0bdaa442ac5587b42f462cd,
+        type: 3}
+      propertyPath: houseIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943125583794461871, guid: 519dc834d0bdaa442ac5587b42f462cd,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 1394440365}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -123063,8 +123083,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291948287
+  m_fontColor: {r: 1, g: 0.93442243, b: 0.8207547, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -131788,8 +131808,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4292014079
+  m_fontColor: {r: 1, g: 0.9372549, b: 0.8235294, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -133261,6 +133281,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5943125583794461871, guid: 519dc834d0bdaa442ac5587b42f462cd,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 1394440365}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -133597,6 +133622,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: grandma_home
       objectReference: {fileID: 0}
+    - target: {fileID: 6944458988463417950, guid: 02499ce130d08ec4b98a62df7376086b,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 1394440365}
+    - target: {fileID: 7822303674255632797, guid: 02499ce130d08ec4b98a62df7376086b,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 1394440365}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -133688,7 +133723,7 @@ PrefabInstance:
     - target: {fileID: 7747834961887092401, guid: 597be9d98c037c540baca53e91dc4ab9,
         type: 3}
       propertyPath: role
-      value: "\u7B80\u5DE5"
+      value: "\u7B80\u59DD\u513F"
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7080319115403306802, guid: 597be9d98c037c540baca53e91dc4ab9, type: 3}
@@ -134085,6 +134120,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: gf_home
       objectReference: {fileID: 0}
+    - target: {fileID: 3052118366254987755, guid: c599828b4f8c3f24d8e3e558540f5850,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 1394440365}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -134554,7 +134594,7 @@ PrefabInstance:
     - target: {fileID: 1606568005376243744, guid: f0d90669f79936447a5a5dee1f0d1c59,
         type: 3}
       propertyPath: m_BodyType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4020374886210008693, guid: f0d90669f79936447a5a5dee1f0d1c59,
         type: 3}
@@ -134649,7 +134689,7 @@ PrefabInstance:
     - target: {fileID: 7277432513303000275, guid: f0d90669f79936447a5a5dee1f0d1c59,
         type: 3}
       propertyPath: speed
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7277432513303000275, guid: f0d90669f79936447a5a5dee1f0d1c59,
         type: 3}
@@ -134848,7 +134888,7 @@ PrefabInstance:
     - target: {fileID: 7414090072282517463, guid: bff5fc4934fe2cd4bb2e76e71a36ed0b,
         type: 3}
       propertyPath: role
-      value: "\u58A8\u8BD7"
+      value: "\u58A8\u6210"
       objectReference: {fileID: 0}
     - target: {fileID: 7997376085543669844, guid: bff5fc4934fe2cd4bb2e76e71a36ed0b,
         type: 3}
@@ -134981,13 +135021,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3505390947943682955, guid: fd234662d8964bf4f97edd3418f4c0c3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7144885
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573100224559577112, guid: fd234662d8964bf4f97edd3418f4c0c3,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 1394440365}
     - target: {fileID: 5312155818001762445, guid: fd234662d8964bf4f97edd3418f4c0c3,
         type: 3}
       propertyPath: m_Name
       value: center_home
       objectReference: {fileID: 0}
+    - target: {fileID: 6122375366379583676, guid: fd234662d8964bf4f97edd3418f4c0c3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122375366379583676, guid: fd234662d8964bf4f97edd3418f4c0c3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.76
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2207707834086748774, guid: fd234662d8964bf4f97edd3418f4c0c3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd234662d8964bf4f97edd3418f4c0c3, type: 3}

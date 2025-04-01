@@ -180,7 +180,6 @@ public class Task7 : TaskBase
             }
             canvasGroup.alpha = 0f;
 
-            Debug.Log("任务7 开始面板已显示并隐藏");
         }
         else
         {
