@@ -33,7 +33,7 @@ public class Task3 : TaskBase
         StartCoroutine(ShowTaskStartPanel());
     }
 
-    public override string GetTaskName() => "光学与力学";
+    public override string GetTaskName() => "力学与光学";
 
     public override string GetTaskObjective() => $"送达【墨成】给【简姝儿】的信：{(letterDeliveredToJianShuEr ? "已完成" : "未完成")}";
 
@@ -153,7 +153,7 @@ public class Task3 : TaskBase
     {
         if (taskCompletePanel != null && taskCompleteText != null)
         {
-            taskCompleteText.text = "任务3——水车";
+            taskCompleteText.text = "任务3——力学与光学";
             taskCompletePanel.SetActive(true);
 
             CanvasGroup canvasGroup = taskCompletePanel.GetComponent<CanvasGroup>();

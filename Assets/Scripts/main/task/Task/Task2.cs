@@ -159,7 +159,7 @@ public class Task2 : TaskBase
     {
         if (taskCompletePanel != null && taskCompleteText != null)
         {
-            taskCompleteText.text = "任务2——力学与献策";
+            taskCompleteText.text = "任务2——出世与入世";
             taskCompletePanel.SetActive(true);
 
             CanvasGroup canvasGroup = taskCompletePanel.GetComponent<CanvasGroup>();

@@ -33,7 +33,7 @@ public class Task6 : TaskBase
         StartCoroutine(ShowTaskStartPanel());
     }
 
-    public override string GetTaskName() => "战火余烬";
+    public override string GetTaskName() => "苍生之约定";
 
     public override string GetTaskObjective() => $"送达【卢氏】给【墨守】的信：{(letterDeliveredToMoShou ? "已完成" : "未完成")}";
 
